@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    .timer {
+        text-align: center;
+        font-size: 5rem;
+        padding: 10px;
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+    }
+    #loopStatus
+    {
+        text-align: center;
+    }
+    @media (max-width: 650px) 
+    {
+        .timer {
+            padding: 10px;
+            margin-top: 100px;
+        }
+    }
+</style>
+</head>
+<body>
+    <div id="timer1" class="timer">Go Exercise</div>
+    <div id="timer2" class="timer" style="display: none;">Rest</div>
+    <p id="loopStatus"></p>
+<script>
+    let intervalId;
+    let currentTimer = 1; // Start with timer 1
+    let timer1Seconds = 23; // 10 seconds for timer 1
+    let timer2Seconds = 10;  // 5 seconds for timer 2
+    let repsCompleted = 0;
+    const totalReps = 4; // Loop 4 times
+
+    const timer1El = document.getElementById('timer1');
+    const timer2El = document.getElementById('timer2');
+    const loopStatusEl = document.getElementById('loopStatus');
+
+    function updateTimers() {
+        // Check if total repetitions are done
+        if (repsCompleted >= totalReps) {
+            clearInterval(intervalId);
+            timer1El.textContent = "Loop finished!";
+            timer2El.style.display = 'none';
+            timer1El.style.display = 'block';
+            loopStatusEl.textContent = "";
+            return;
+        }
+
+        if (currentTimer === 1) {
+            timer1El.style.display = 'block';
+            timer2El.style.display = 'none';
+            timer1El.textContent = `Go: ${timer1Seconds}s`;
+            loopStatusEl.textContent = `Repetition ${repsCompleted + 1} of ${totalReps}`;
+
+            if (timer1Seconds <= 0) {
+                currentTimer = 2;
+                timer1Seconds = 23; // Reset timer 1
+            } else {
+                timer1Seconds--;
+            }
+        } else {
+            timer2El.style.display = 'block';
+            timer1El.style.display = 'none';
+            timer2El.textContent = `Rest: ${timer2Seconds}s`;
+            loopStatusEl.textContent = `Repetition ${repsCompleted + 1} of ${totalReps}`;
+
+
+            if (timer2Seconds <= 0) {
+                currentTimer = 1;
+                timer2Seconds = 10; // Reset timer 2
+                repsCompleted++; // Increment repetition count after both timers run
+            } else {
+                timer2Seconds--;
+            }
+        }
+    }
+
+    // Initial call to avoid a 1-second delay
+    updateTimers();
+
+    // Update the countdown every second
+    intervalId = setInterval(updateTimers, 1000);
+
+</script>
+
+
+
+</body>
+</html>
