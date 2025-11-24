@@ -35,13 +35,14 @@
     <div id="timer1" class="timer">Go Exercise</div>
     <div id="timer2" class="timer" style="display: none;">Rest</div>
     <p id="loopStatus"></p>
+
 <script>
     let intervalId;
     let currentTimer = 1; // Start with timer 1
-    let timer1Seconds = 23; // 10 seconds for timer 1
-    let timer2Seconds = 10;  // 5 seconds for timer 2
+    let timer1Seconds = 23; // 23 seconds for timer 1 start exercise
+    let timer2Seconds = 10;  // 10 seconds for timer 2 rest for 10 secs
     let repsCompleted = 0;
-    const totalReps = 4; // Loop 4 times
+    const totalReps = 7; // Loop 6 times
 
     const timer1El = document.getElementById('timer1');
     const timer2El = document.getElementById('timer2');
@@ -99,4 +100,3 @@
 
 </body>
 </html>
-
